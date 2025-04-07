@@ -1,25 +1,17 @@
-# 📊 1. Общая статистика и overview
+# General statistics and  overview
 
-# Сколько всего фильмов и сериалов в базе
-query = """
+# The total number of movies and TV series
+query_total = """
     SELECT titleType, count(*) as count
     FROM `imdb-dataset-453510.IMDb_dataset.title_basics`
     GROUP BY titleType
     ORDER BY count DESC;
 """
 
-# Распределение по годам выпуска
-# Вариант A — по годам
+# Distribution by year of production
 
-query1 = """SELECT startYear, COUNT(*) AS num_titles
-FROM `imdb-dataset-453510.IMDb_dataset.title_basics`
-WHERE startYear IS NOT NULL
-GROUP BY startYear
-ORDER BY startYear;
-"""
-
-# Вариант B — по десятилетиям
-query2 = """
+# By decades
+query_decade = """
 SELECT
   CAST(SAFE_CAST(startYear AS INT64) / 10 AS INT64) * 10 AS decade,
   COUNT(*) AS num_titles
@@ -29,8 +21,8 @@ GROUP BY decade
 ORDER BY decade;
 """
 
-# Средняя продолжительность фильмов/серий
-query3 = """
+# Average runtime
+query_average = """
 SELECT titleType, round(avg(runtimeMinutes),2) as average 
 FROM `imdb-dataset-453510.IMDb_dataset.title_basics` 
 where runtimeMinutes != 0 
@@ -38,9 +30,8 @@ group by titleType
 
 """
 
-# Топ жанры по средней оценке
-
-query4 = """
+# Top 10 Genres by Average Rating
+query_top_genres = """
 
 SELECT 
   genre,
@@ -55,6 +46,6 @@ FROM (
 )
 JOIN UNNEST(SPLIT(genres, ',')) AS genre
 GROUP BY genre
-ORDER BY avg_rating DESC;
-
+ORDER BY avg_rating DESC
+LIMIT 10;
 """

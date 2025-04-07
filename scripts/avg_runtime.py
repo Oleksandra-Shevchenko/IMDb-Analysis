@@ -1,18 +1,10 @@
-import matplotlib.pyplot as plt
+from sql.general_query import query_average as query
 from utils.bq_query import get_bq_client
 import matplotlib
 import matplotlib.pyplot as plt
 matplotlib.use('TkAgg')
 
 client = get_bq_client()
-
-query = """
-SELECT titleType, round(avg(runtimeMinutes),2) as average 
-FROM `imdb-dataset-453510.IMDb_dataset.title_basics` 
-where runtimeMinutes != 0 
-group by titleType
-
-"""
 
 # Выполняем запрос
 query_job = client.query(query)

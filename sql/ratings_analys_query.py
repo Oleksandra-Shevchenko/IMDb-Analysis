@@ -1,8 +1,7 @@
-# ⭐ 2. Анализ оценок
+# ⭐ 2. Rating analysis
 
-# 🎯 1. Фильмы/сериалы с наивысшими рейтингами и большим числом голосов (например, > 10,000)
-
-query = """
+# top films
+query_top_films = """
 SELECT 
   t.primaryTitle as movie_name,
   t.startYear as year,
@@ -11,27 +10,25 @@ SELECT
 FROM `imdb-dataset-453510.IMDb_dataset.title_basics` AS t
 JOIN `imdb-dataset-453510.IMDb_dataset.title_ratings` AS r
   ON r.tconst = t.tconst
-WHERE r.numVotes >= 10000 AND t.titleType = 'movie'
+WHERE r.numVotes >= 1000000 AND t.titleType = 'movie'
 ORDER BY r.averageRating DESC
-LIMIT 50;
+LIMIT 10;
 """
 
-# 📈 2. Связь между оценкой и количеством голосов (корреляция, выбросы)
-
-query2 = """
+# 2.Correlation between ratings and votes
+query_correlation_ratings_votes = """
 SELECT 
   r.averageRating,
   r.numVotes
 FROM `imdb-dataset-453510.IMDb_dataset.title_ratings` AS r
-WHERE r.numVotes > 100  -- уберём мусор с 5-10 голосами
-
+WHERE r.numVotes > 1000000
 """
 
 
-# изменение рейтинговых трендов с годами
+# Genres over time
 
-query5 = """
--- Шаг 1: Находим 5 самых популярных жанров (по количеству фильмов)
+query_genres_over_time = """
+-- Top 5 most popular genres
 WITH top_5_genres AS (
   SELECT genre
   FROM (
@@ -47,11 +44,11 @@ WITH top_5_genres AS (
   )
 ),
 
--- Шаг 2: Расчёт среднего рейтинга по жанрам и 5-леткам
+-- aversge rating by genre and 20 years gap
 genre_rating_by_period AS (
   SELECT 
     genre,
-    CAST(SAFE_CAST(t.startYear AS INT64) / 5 AS INT64) * 5 AS period_5yr,
+    CAST(SAFE_CAST(t.startYear AS INT64) / 20 AS INT64) * 20 AS period_5yr,
     ROUND(AVG(r.averageRating), 2) AS avg_rating,
     COUNT(*) AS num_titles
   FROM `imdb-dataset-453510.IMDb_dataset.title_basics` AS t
@@ -63,7 +60,7 @@ genre_rating_by_period AS (
   HAVING COUNT(*) >= 10
 )
 
--- Шаг 3: Фильтрация только по топ-5 жанрам
+-- filtered only 5 genres
 SELECT 
   g.genre,
   g.period_5yr,

@@ -1,8 +1,7 @@
-# 👨‍🎤 3. Анализ персоналий
+# Actors analysis
 
-# 🔹 1. Самые активные актеры/актрисы
-query = """
-
+# 1. Most active actors
+query_active = """
 SELECT 
   n.primaryName,
   COUNT(DISTINCT b.tconst) AS film_count
@@ -15,15 +14,13 @@ WHERE p.category IN ('actor', 'actress')
   AND b.titleType IN ('movie', 'tvMovie') 
   AND p.ordering = 1
 GROUP BY n.primaryName
-HAVING film_count >= 5
+HAVING film_count >= 10
 ORDER BY film_count DESC
-LIMIT 100;
-
-
+LIMIT 20;
 """
 
-# 🔹 2. Актёры, снимавшиеся в самых высоко оцененных фильмах
-query1 = """
+# 2. Top movie actors
+query_top_movie_actors = """
 SELECT 
   r.averageRating,
   r.numVotes,
@@ -42,13 +39,11 @@ WHERE b.titleType = 'movie'
   AND p.ordering = 1
 
 ORDER BY r.averageRating DESC
-LIMIT 100;
-
+LIMIT 10;
 """
 
-# 🔹 3. Кто работал чаще всего в жанре Drama
-
-query2 = """
+# 3. Actors in dramas
+query_drama_actors = """
 SELECT 
   n.primaryName,
   COUNT(*) AS num_drama_titles
@@ -63,7 +58,5 @@ WHERE genre = 'Drama'
   AND r.numVotes >= 10000
 GROUP BY n.primaryName
 ORDER BY num_drama_titles DESC
-LIMIT 20;
-
-
+LIMIT 10;
 """

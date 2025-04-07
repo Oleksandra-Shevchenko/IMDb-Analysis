@@ -1,17 +1,10 @@
 from utils.bq_query import get_bq_client
+from sql.general_query import query_total as query
 import matplotlib
 import matplotlib.pyplot as plt
 matplotlib.use('TkAgg')
 
 client = get_bq_client()
-
-
-query = """
-    SELECT titleType, count(*) as count
-    FROM `imdb-dataset-453510.IMDb_dataset.title_basics`
-    GROUP BY titleType
-    ORDER BY count DESC;
-"""
 
 # Выполняем запрос
 query_job = client.query(query)
@@ -21,7 +14,6 @@ df = query_job.to_dataframe()
 
 # Выводим первые строки
 print(df)
-
 
 # df — результат твоего запроса (titleType, count)
 df_sorted = df.sort_values("count", ascending=False)
@@ -48,4 +40,6 @@ plt.xlabel("Count")
 plt.title("Distribution of Titles by Type")
 
 plt.tight_layout()
+plt.savefig("../plots/general_count.png", dpi=300)
+
 plt.show()

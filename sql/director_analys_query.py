@@ -1,7 +1,7 @@
-# 4. Режиссёры и съёмочные группы (title.crew_clean.csv)
+# Directors analysis
 
-# 1. Режиссёры с наибольшим количеством фильмов
-query = """
+# Directors with the most films produced
+query_directors_films = """
 SELECT 
       n.primaryName,
       COUNT(*) AS film_count
@@ -14,13 +14,12 @@ where string_field_1 != 'Unknown'
 and string_field_2 != 'Unknown'
 group by directors, n.primaryName
 ORDER BY film_count DESC
-LIMIT 50
-
+LIMIT 10
 """
 
-# 2. топ режисеров с самыми высокими средними рейтингами.
+# top directors with the highest average ratings.
 
-query1 = """
+query_top_directors = """
 SELECT 
       n.primaryName,
       COUNT(*) AS film_count,
@@ -37,16 +36,13 @@ and string_field_2 != 'Unknown'
 and r.numVotes >=10000
 
 group by directors, n.primaryName
-HAVING COUNT(*) >= 5
+HAVING COUNT(*) >= 10
 ORDER BY avg_rating DESC
-LIMIT 50
-
-
+LIMIT 10
 """
 
-# 3. Есть ли связь между известными режиссёрами и высокими оценками?
-
-query2 = """
+# the connection between famous directors and high ratings
+query_directors_vs_ratings = """
 WITH director_stats AS (
   SELECT 
     directors AS director_id,

@@ -1,22 +1,10 @@
 from utils.bq_query import get_bq_client
+from sql.general_query import query_decade as query
 import matplotlib
 import matplotlib.pyplot as plt
 matplotlib.use('TkAgg')
 
 client = get_bq_client()
-
-
-query = """
-SELECT
-    CAST(CAST(startYear AS INT64) / 10 AS INT64) * 10 AS decade,
-    COUNT(*) AS num_titles
-FROM `imdb-dataset-453510.IMDb_dataset.title_basics`
-WHERE startYear IS NOT NULL
-  AND startYear >= 1900
-GROUP BY decade
-ORDER BY decade;
-
-"""
 
 # Выполняем запрос
 query_job = client.query(query)
@@ -42,4 +30,6 @@ plt.xlabel("Decade")
 plt.ylabel("Number of Titles")
 plt.grid(True)
 plt.tight_layout()
+plt.savefig("../plots/titles_by_decade.png", dpi=300)
+
 plt.show()
