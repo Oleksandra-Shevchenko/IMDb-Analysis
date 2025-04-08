@@ -27,12 +27,10 @@ SELECT titleType, round(avg(runtimeMinutes),2) as average
 FROM `imdb-dataset-453510.IMDb_dataset.title_basics` 
 where runtimeMinutes != 0 
 group by titleType
-
 """
 
 # Top 10 Genres by Average Rating
 query_top_genres = """
-
 SELECT 
   genre,
   COUNT(*) AS count,
@@ -43,9 +41,11 @@ FROM (
   JOIN `imdb-dataset-453510.IMDb_dataset.title_ratings` AS r
     ON r.tconst = t.tconst
   WHERE t.genres IS NOT NULL
+  and r.numVotes >=100000
 )
 JOIN UNNEST(SPLIT(genres, ',')) AS genre
 GROUP BY genre
+having count(*) >=100
 ORDER BY avg_rating DESC
 LIMIT 10;
 """
