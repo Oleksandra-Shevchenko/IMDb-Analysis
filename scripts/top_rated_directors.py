@@ -5,23 +5,15 @@ import matplotlib.pyplot as plt
 matplotlib.use('TkAgg')
 
 client = get_bq_client()
-
-# Выполняем запрос
 query_job = client.query(query)
-
-# Преобразуем результат в DataFrame
 df = query_job.to_dataframe()
-
-# Выводим первые строки
-print(df)
 
 plt.figure(figsize=(10, 6))
 bars = plt.barh(df["primaryName"], df["avg_rating"], color="seagreen")
 
-# Добавим подписи: средняя оценка + количество фильмов
 for bar, rating in zip(bars, df["avg_rating"]):
     plt.text(
-        bar.get_width() + 0.01,      # немного правее от края бара
+        bar.get_width() + 0.01,
         bar.get_y() + bar.get_height() / 2,
         f"{rating:.2f}",
         va='center',

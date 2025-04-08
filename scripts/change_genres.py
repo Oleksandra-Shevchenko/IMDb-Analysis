@@ -6,22 +6,14 @@ matplotlib.use('TkAgg')
 
 client = get_bq_client()
 
-# Выполняем запрос
 query_job = client.query(query)
 
-# Преобразуем результат в DataFrame
 df = query_job.to_dataframe()
 
-# Выводим первые строки
-print(df)
-
-# df = твой DataFrame с колонками genre, period_5yr, avg_rating
 df_sorted = df.sort_values(["genre", "period_5yr"])
 
-# 🎨 Строим график
 plt.figure(figsize=(12, 6))
 
-# Поочередно рисуем линии для каждого жанра
 for genre in df_sorted["genre"].unique():
     genre_df = df_sorted[df_sorted["genre"] == genre]
     plt.plot(genre_df["period_5yr"], genre_df["avg_rating"], label=genre, marker="o")

@@ -6,21 +6,15 @@ matplotlib.use('TkAgg')
 
 client = get_bq_client()
 
-# Выполняем запрос
 query_job = client.query(query)
 
-# Преобразуем результат в DataFrame
 df = query_job.to_dataframe()
 
-# Выводим первые строки
-print(df)
-
-colors = ["#2E8B57", "#87CEEB"]  # зелёный и голубой
+colors = ["#2E8B57", "#87CEEB"]
 
 plt.figure(figsize=(6, 4))
 bars = plt.bar(df["status"], df["avg_director_rating"], color=colors)
 
-# Добавим подписи сверху
 for bar, rating in zip(bars, df["avg_director_rating"]):
     plt.text(
         bar.get_x() + bar.get_width() / 2,
