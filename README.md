@@ -2,23 +2,23 @@
 ![imdb analysis](plots/IMDB.svg)
 &nbsp; 
 ## 🚀 Introduction: What Makes a Film Popular?
-In the world of cinema, where hundreds of new films are released every day, understanding what truly captures the audience’s attention is a challenging yet fascinating task. In this personal project, I explore publicly available IMDb datasets to uncover the key factors that influence viewer recognition and film popularity. My goal is to understand how genres, runtime, and—most importantly—the involvement of specific directors and actors shape how audiences perceive a film. I also look at how these preferences have evolved over time.
+In the world of cinema, where hundreds of new films are released every day, understanding what truly captures the audience’s attention is a challenging yet fascinating task. In this **personal project**, I explore publicly available IMDb datasets to uncover the **key factors that influence viewer recognition and film popularity**. My goal is to understand how genres, runtime, and—most importantly—the involvement of specific directors and actors shape how audiences perceive a film. I also look at how these preferences have evolved over time.
 
-This project does not aim to predict box office revenue or commercial success, as it relies solely on publicly accessible IMDb data that does not include financial information. Instead, the focus is on analyzing critical and audience reception—average ratings and vote counts—and on examining the impact of the people behind and in front of the camera.
+This project does not aim to predict box office revenue or commercial success, as it relies solely on publicly accessible IMDb data that does not include financial information. Instead, the focus is on **analyzing critical and audience reception** —average ratings and vote counts—and on examining **the impact of the people behind and in front of the camera**.
 
 &nbsp; 
 ## ❓ Key Research Questions
 In this project, I aim to answer the following questions using IMDb data:
 
-- What defines a “successful” film in terms of audience ratings and overall popularity?
+- **What defines a “successful” film in terms of audience ratings and overall popularity?**
 
-- How are genres and keywords related to a film’s ratings and popularity?
+- **How are genres and keywords related to a film’s ratings and popularity?**
 
-- How have ratings, popularity, and genre preferences in the film industry evolved over time?
+- **How have ratings, popularity, and genre preferences in the film industry evolved over time?**
 
-- Which directors and actors (based on their specific roles) are consistently associated with highly rated and popular films?
+- **Which directors and actors (based on their specific roles) are consistently associated with highly rated and popular films?**
 
-- How does a film’s runtime affect its average rating and number of votes?
+- **How does a film’s runtime affect its average rating and number of votes?**
 
 
 &nbsp;
@@ -47,17 +47,17 @@ rovides information about individuals (e.g. actors, directors), including their 
     
  Contains directors and writers for each title, often stored as comma-separated IDs.
 
-🧹 Data Preparation: Making the Data Clean and Analysis-Ready
+🧹 **Data Preparation: Making the Data Clean and Analysis-Ready**
 
 High-quality analysis starts with clean data. Before diving into the exploration, I completed the following data preparation steps (the full code and process details are available in [cleaning_scripts](./cleaning_scripts)):
 
-- Data merging: The original TSV files were converted to CSV and merged using the common movie identifier (tconst) to form a unified dataset for analysis (specifically, title_ratings and title_basics tables).
+- **Data merging:** The original TSV files were converted to CSV and merged using the common movie identifier (`tconst`) to form a unified dataset for analysis (specifically, **title_ratings** and **title_basics** tables).
 
-- Handling missing values: Missing data in key columns (averageRating, numVotes, genres, runtimeMinutes, startYear) was addressed—primarily by removing incomplete rows or imputing values logically—to ensure accurate calculations.
+- **Handling missing values:** Missing data in key columns (`averageRating`, `numVotes`, `genres`, `runtimeMinutes`, `startYear`) was addressed—primarily by removing incomplete rows or imputing values logically—to ensure accurate calculations.
 
-- Data type conversion: Columns such as startYear, runtimeMinutes, averageRating, and numVotes were cast to appropriate numeric formats.
+- **Data type conversion:** Columns such as `startYear`, `runtimeMinutes`, `averageRating`, and `numVotes` were cast to appropriate numeric formats.
 
-- Parsing categorical data: Genre values, as well as director and actor identifiers (stored as comma-separated strings), were parsed—often within SQL queries—for entity-level analysis.
+- **Parsing categorical data:** Genre values, as well as director and actor identifiers (stored as comma-separated strings), were parsed—often within **SQL queries** —for entity-level analysis.
 
 
  &nbsp; 
