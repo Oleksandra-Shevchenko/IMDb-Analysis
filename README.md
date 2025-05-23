@@ -81,16 +81,16 @@ We begin with a broad look at the distribution of our key success metrics and th
 
     - **Insight:** The film industry has experienced exponential growth over the past few decades, especially since the 1990s. This surge is primarily driven by the massive volume of TV episodes, which now make up the overwhelming majority of entries in the IMDb database—far surpassing feature films and short films.
 
-![imdb analysis](plots/1titles_by_decade.png)
+![imdb analysis](plots/titles_by_decade.png)
 
 - **Rating and Popularity Distribution:**
     - **Insight:** The distribution of average movie ratings indicates that most films fall within the **6.5 to 8.0** range, with a peak around **7.5**. This reflects a general trend toward "good but not outstanding" scores.
 When it comes to popularity, most films receive a **relatively low number of votes** (up to 99), while only a small share exceeds **1,000 votes**, and just a few surpass **1 million votes**. This confirms that despite the vast number of movies, only a small percentage achieve extremely high audience engagement.
 
 
-![imdb analysis](plots/1average_rating_hist.png)
+![imdb analysis](plots/average_rating_hist.png)
 
-![imdb analysis](plots/1num_votes_log_bins.png)
+![imdb analysis](plots/num_votes_log_bins.png)
 
 
 **2. Genres and Keywords: The Pulse of the Film Industry**
@@ -101,19 +101,19 @@ Which themes and categories resonate most with audiences?
 
     - **Insight:** Drama, Comedy, and Documentary remain the most common genres across both movies and TV series. However, Reality TV and Talk Shows are almost entirely exclusive to serial formats, while Action, Romance, and Thriller are significantly more frequent in feature films.
 
-![imdb analysis](plots/1movies_vs_series_by_genres.png)
+![imdb analysis](plots/movies_vs_series_by_genres.png)
   
 - **Top-Rated Genres:**
 
     - **Insight:** Genres such as Biography, Animation, and Drama consistently receive high viewer ratings, possibly due to their ability to evoke deep emotions and deliver quality storytelling.
   
-![imdb analysis](plots/1top_genres_by_rating.png)
+![imdb analysis](plots/top_genres_by_rating.png)
 
 - **Relationship Between Rating and Popularity:**
 
     - **Insight:** There is a moderate positive correlation (r ≈ 0.63) between the number of votes and a film’s average rating. This suggests that more popular films tend to have slightly higher ratings. However, a high number of votes does not necessarily guarantee a high rating.
 
-![imdb analysis](plots/1correlation_ratings_votes.png)
+![imdb analysis](plots/correlation_ratings_votes.png)
 
 **3. Film Industry Dynamics: Trends Over Time**
 
@@ -123,13 +123,13 @@ How have ratings, popularity, and genre preferences evolved in cinema over the y
 
     - **Insight:** All genres show a general upward trend in ratings over time, especially between 1940 and 2000. Documentaries and Dramas demonstrate the most stable growth.
 
-![imdb analysis](plots/1genres_over_time.png)
+![imdb analysis](plots/genres_over_time.png)
 
 - **Evolution of Genre Popularity:**
 
     - **Insight:** Over time, there have been significant shifts in genre shares. For example, the share of **Drama** and **Comedy* has remained relatively stable, while **Action** and **Animation** have shown growing popularity, especially since the 1980s. This may reflect changes in production capabilities, audience preferences, and technological advancements that enable the creation of more complex visual effects.
 
-![imdb analysis](plots/1genre_share_by_period_colored.png)
+![imdb analysis](plots/genre_share_by_period_colored.png)
 
 **4. Impact of Directors and Actors: Who Drives Success?**
 
@@ -139,25 +139,25 @@ How significant is the role of key creators (directors, actors) in achieving hig
 
     - **Insight:** Directors with a large number of popular works tend to have significantly higher average ratings (7.31) compared to others (6.68). This suggests that experience and reputation are correlated with the overall perception of their films.
       
-![imdb analysis](plots/1directors_vs_ratings.png)
+![imdb analysis](plots/directors_vs_ratings.png)
 
 - **Actors as Genre Icons:**
 
     - **Insight:** Some actors become synonymous with certain genres and consistently appear in highly rated or popular projects within those genres. For example, Robert De Niro leads in the number of roles in drama films.
       
-![imdb analysis](plots/1drama_actors.png)
+![imdb analysis](plots/drama_actors.png)
 
 - **Most Productive Creators:**
 - 
   - **Insight:** The analysis shows that the most prolific directors, such as **Johnny Manahan** (over 13,000 films) and **Nivedita Basu** (over 11,000 films), as well as actors like **Matsunosuke Onoe** (525 appearances), often work in high-volume content formats such as TV series, where each episode is counted as a separate film. This highlights their significant role in continuous content production, but does not always directly correlate with their average ratings, as their extensive filmographies may include both highly rated and less prominent works.
 
-![imdb analysis](plots/1directors_films.png)
-![imdb analysis](plots/1top_active_actors.png)
+![imdb analysis](plots/directors_films.png)
+![imdb analysis](plots/top_active_actors.png)
 
 - **Top-Rated Directors:**
   - **Insight:** Unlike productivity, a high average rating reflects the consistent quality of a director’s work as valued by audiences. Directors such as **Tomohisa Taguchi**, **Barth Maunoury**, and **Shouta Goshozono** top this list with average ratings above **9.2**, significantly exceeding the overall mean. This indicates that these directors are capable of creating films that are not only popular, but also receive deep and lasting audience appreciation. Their works often set a benchmark for quality within their genres.
 
-![imdb analysis](plots/1top_rated_directors.png)
+![imdb analysis](plots/top_rated_directors.png)
 
 
 **5. Analysis of Film Duration Impact**
@@ -166,19 +166,19 @@ How does a film's duration (`runtimeMinutes`) affect its average rating and numb
 
 - **Insight on Typical Runtimes:** Content duration varies significantly depending on its type. For example, video games and feature films tend to have the highest average runtimes, while TV episodes and short films are considerably shorter.
 
-![imdb analysis](plots/1runtime_by_type.png)
+![imdb analysis](plots/runtime_by_type.png)
 
 - **Runtime’s Impact on Ratings**
 
 The analysis shows that films with an average runtime between **60 and 90 minutes** tend to achieve **higher average ratings**. Ratings decline for titles that are either **too short (less than 60 minutes)** or **too long (over 150–180 minutes)**. This may indicate the existence of an optimal runtime that keeps viewers engaged.
 
-![imdb analysis](plots/1runtime_vs_rating.png)
+![imdb analysis](plots/runtime_vs_rating.png)
 
 - **Runtime’s Impact on Popularity**
 
 When it comes to popularity (measured by the number of votes), there's a noticeable trend: films with **average to slightly above-average runtimes (approximately 120 to 170 minutes)** tend to receive the **highest number of votes**. Extremely short or very long films generally attract a smaller audience, which is reflected in a lower number of votes.
 
-![imdb analysis](plots/1runtime_vs_votes.png)
+![imdb analysis](plots/runtime_vs_votes.png)
 
 &nbsp; 
 

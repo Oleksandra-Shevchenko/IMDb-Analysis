@@ -2,13 +2,12 @@
 
 # 1.What genres are the most films/TV series made in?
 query_movie_vs_series = """
---general count by genre and type 
 WITH genre_counts AS (
   SELECT 
     genre,
     titleType,
     COUNT(*) AS count
-  FROM `imdb-dataset-453510.IMDb_dataset.title_basics`
+  FROM `imdb-dataset-453510.IMDb_dataset.title_with_ratings`
   JOIN UNNEST(SPLIT(genres, ',')) AS genre
   WHERE titleType IN ('movie', 'tvSeries')
   GROUP BY genre, titleType
@@ -25,7 +24,7 @@ genre_totals AS (
   LIMIT 15
 )
 
--- take only top genre
+
 SELECT 
   gc.genre,
   gc.titleType,
@@ -33,4 +32,5 @@ SELECT
 FROM genre_counts gc
 JOIN genre_totals gt ON gc.genre = gt.genre
 ORDER BY gt.total_count DESC, gc.titleType
+
 """
