@@ -48,14 +48,13 @@ rovides information about individuals (e.g. actors, directors), including their 
  Contains directors and writers for each title, often stored as comma-separated IDs.
 
 
-
- **Data Preparation: Making the Data Clean and Analysis-Ready**
+**Data Preparation: Making the Data Clean and Analysis-Ready**
 
 High-quality analysis starts with clean data. Before diving into the exploration, I completed the following data preparation steps (the full code and process details are available in [cleaning_scripts](./cleaning_scripts)):
 
 - **Data merging:** The original TSV files were converted to CSV and merged using the common movie identifier (`tconst`) to form a unified dataset for analysis (specifically, **title_ratings** and **title_basics** tables).
 
-- **Handling missing values:** Missing data in key columns (`averageRating`, `numVotes`, `genres`, `runtimeMinutes`, `startYear`) was addressed—primarily by removing incomplete rows or imputing values logically—to ensure accurate calculations.
+- **Handling missing values:** Missing data in key columns (`averageRating`, `numVotes`, `genres`, `runtimeMinutes`, `startYear`) was processed —primarily by removing incomplete rows or imputing values logically—to ensure accurate calculations.
 
 - **Data type conversion:** Columns such as `startYear`, `runtimeMinutes`, `averageRating`, and `numVotes` were cast to appropriate numeric formats.
 
@@ -79,15 +78,19 @@ Now that the data is prepared, let’s dive into it and uncover patterns that ad
 We begin with a broad look at the distribution of our key success metrics and the overall volume of content production.
 
 - **Content Production Dynamics:**
+
     - **Insight:** The film industry has experienced exponential growth over the past few decades, especially since the 1990s. This surge is primarily driven by the massive volume of TV episodes, which now make up the overwhelming majority of entries in the IMDb database—far surpassing feature films and short films.
 
-![imdb analysis](plots/titles_by_decade.png)
+![imdb analysis](plots/1titles_by_decade.png)
 
 - **Rating and Popularity Distribution:**
-    - **Insight:** Most films have an average rating between 6.5 and 7.5. Popularity (measured by vote count) is heavily skewed toward lower values, which is expected, as only a small number of films reach extremely high levels of audience engagement.
-    - **Visualization:**
-        - *(New chart)* Histogram of `averageRating`
-        - *(New chart)* Histogram of `numVotes` (possibly on a logarithmic scale for better readability)
+    - **Insight:** The distribution of average movie ratings indicates that most films fall within the **6.5 to 8.0** range, with a peak around **7.5**. This reflects a general trend toward "good but not outstanding" scores.
+When it comes to popularity, most films receive a **relatively low number of votes** (up to 99), while only a small share exceeds **1,000 votes**, and just a few surpass **1 million votes**. This confirms that despite the vast number of movies, only a small percentage achieve extremely high audience engagement.
+
+
+![imdb analysis](plots/1average_rating_hist.png)
+
+![imdb analysis](plots/1num_votes_log_bins.png)
 
 
 **2. Genres and Keywords: The Pulse of the Film Industry**
@@ -95,68 +98,87 @@ We begin with a broad look at the distribution of our key success metrics and th
 Which themes and categories resonate most with audiences?
 
 - **Genre Popularity by Content Type:**
+
     - **Insight:** Drama, Comedy, and Documentary remain the most common genres across both movies and TV series. However, Reality TV and Talk Shows are almost entirely exclusive to serial formats, while Action, Romance, and Thriller are significantly more frequent in feature films.
 
-![imdb analysis](plots/movies_vs_series_by_genres.png)
+![imdb analysis](plots/1movies_vs_series_by_genres.png)
   
 - **Top-Rated Genres:**
+
     - **Insight:** Genres such as Biography, Animation, and Drama consistently receive high viewer ratings, possibly due to their ability to evoke deep emotions and deliver quality storytelling.
   
-![imdb analysis](plots/top_genres_by_rating.png)
+![imdb analysis](plots/1top_genres_by_rating.png)
 
 - **Relationship Between Rating and Popularity:**
+
     - **Insight:** There is a moderate positive correlation (r ≈ 0.63) between the number of votes and a film’s average rating. This suggests that more popular films tend to have slightly higher ratings. However, a high number of votes does not necessarily guarantee a high rating.
 
-![imdb analysis](plots/correlation_ratings_votes.png)
+![imdb analysis](plots/1correlation_ratings_votes.png)
 
 **3. Film Industry Dynamics: Trends Over Time**
 
 How have ratings, popularity, and genre preferences evolved in cinema over the years?
 
 - **Genre Rating Trends by Decade:**
+
     - **Insight:** All genres show a general upward trend in ratings over time, especially between 1940 and 2000. Documentaries and Dramas demonstrate the most stable growth.
 
-![imdb analysis](plots/genres_over_time.png)
+![imdb analysis](plots/1genres_over_time.png)
 
 - **Evolution of Genre Popularity:**
-    - **Insight:** *(To be written: describe which genres have grown or declined in popularity)*
-    - **Visualization:**
-        - *(New chart)* `Stacked bar chart` (or `line plot`) of genre share by `Release_Year`. This will show how the distribution of genres changes over time.
+
+    - **Insight:** Over time, there have been significant shifts in genre shares. For example, the share of **Drama** and **Comedy* has remained relatively stable, while **Action** and **Animation** have shown growing popularity, especially since the 1980s. This may reflect changes in production capabilities, audience preferences, and technological advancements that enable the creation of more complex visual effects.
+
+![imdb analysis](plots/1genre_share_by_period_colored.png)
 
 **4. Impact of Directors and Actors: Who Drives Success?**
 
 How significant is the role of key creators (directors, actors) in achieving high ratings and broad popularity?
 
 - **Influence of “Famous” Directors:**
+
     - **Insight:** Directors with a large number of popular works tend to have significantly higher average ratings (7.31) compared to others (6.68). This suggests that experience and reputation are correlated with the overall perception of their films.
       
-![imdb analysis](plots/directors_vs_ratings.png)
+![imdb analysis](plots/1directors_vs_ratings.png)
 
 - **Actors as Genre Icons:**
+
     - **Insight:** Some actors become synonymous with certain genres and consistently appear in highly rated or popular projects within those genres. For example, Robert De Niro leads in the number of roles in drama films.
       
-![imdb analysis](plots/drama_actors.png)
+![imdb analysis](plots/1drama_actors.png)
 
 - **Most Productive Creators:**
-    - **Insight:** *(Describe which actors/directors are the most productive, and how their productivity correlates with the average rating/popularity of their work.)*
-    - **Visualization:**
-        - *(New chart)* Bar plot of top actors by number of projects  
-          *(filter by a minimum number of votes to exclude films with only 1 rating).*
-        - *(New chart)* Bar plot of top directors by number of projects
+- 
+  - **Insight:** The analysis shows that the most prolific directors, such as **Johnny Manahan** (over 13,000 films) and **Nivedita Basu** (over 11,000 films), as well as actors like **Matsunosuke Onoe** (525 appearances), often work in high-volume content formats such as TV series, where each episode is counted as a separate film. This highlights their significant role in continuous content production, but does not always directly correlate with their average ratings, as their extensive filmographies may include both highly rated and less prominent works.
 
-![imdb analysis](plots/directors_films.png)
+![imdb analysis](plots/1directors_films.png)
+![imdb analysis](plots/1top_active_actors.png)
+
+- **Top-Rated Directors:**
+  - **Insight:** Unlike productivity, a high average rating reflects the consistent quality of a director’s work as valued by audiences. Directors such as **Tomohisa Taguchi**, **Barth Maunoury**, and **Shouta Goshozono** top this list with average ratings above **9.2**, significantly exceeding the overall mean. This indicates that these directors are capable of creating films that are not only popular, but also receive deep and lasting audience appreciation. Their works often set a benchmark for quality within their genres.
+
+![imdb analysis](plots/1top_rated_directors.png)
+
 
 **5. Analysis of Film Duration Impact**
 
 How does a film's duration (`runtimeMinutes`) affect its average rating and number of votes?
 
-- **Insight:** *(Describe whether there is an optimal duration range in terms of average rating or vote count. For example, “Films with a medium runtime (90–120 minutes) tend to receive the highest average ratings...”)*
+- **Insight on Typical Runtimes:** Content duration varies significantly depending on its type. For example, video games and feature films tend to have the highest average runtimes, while TV episodes and short films are considerably shorter.
 
-- **Visualization:**
-    - *(New chart)* Scatter plot: `runtimeMinutes` vs `averageRating`
-    - *(New chart)* Scatter plot: `runtimeMinutes` vs `numVotes`
-    - *(Optional but recommended)* Bar plot: Average `averageRating` and `numVotes` by runtime categories (e.g., "up to 60 min", "60–90 min", "90–120 min", "120–150 min", "over 150 min"). This often provides more clarity than scatter plots.
+![imdb analysis](plots/1runtime_by_type.png)
 
+- **Runtime’s Impact on Ratings**
+
+The analysis shows that films with an average runtime between **60 and 90 minutes** tend to achieve **higher average ratings**. Ratings decline for titles that are either **too short (less than 60 minutes)** or **too long (over 150–180 minutes)**. This may indicate the existence of an optimal runtime that keeps viewers engaged.
+
+![imdb analysis](plots/1runtime_vs_rating.png)
+
+- **Runtime’s Impact on Popularity**
+
+When it comes to popularity (measured by the number of votes), there's a noticeable trend: films with **average to slightly above-average runtimes (approximately 120 to 170 minutes)** tend to receive the **highest number of votes**. Extremely short or very long films generally attract a smaller audience, which is reflected in a lower number of votes.
+
+![imdb analysis](plots/1runtime_vs_votes.png)
 
 &nbsp; 
 
@@ -204,135 +226,3 @@ This analysis provides insight into the multifaceted factors that influence audi
 - **External Data Integration:** Incorporate external data sources such as awards (e.g., Oscars, Golden Globes) to compare critical acclaim with audience recognition.
 
 - **ML Applications:** Develop machine learning models to predict the potential rating or popularity of a new film based on its characteristics.
-
-## Insights Deep-Dive
-
-### Title Type Distribution
----
-![imdb analysis](plots/general_count.png)
-This chart illustrates the breakdown of content types in the IMDb dataset. **TV episodes** dominate by a significant margin, accounting for the majority of entries. This is primarily because each episode of a TV series is listed as an individual record. Following that, **short films and movies** are the next most common types, reflecting their popularity and consistent production across decades.
-
-&nbsp;
-### Production Over Time
----
-![imdb analysis](plots/titles_by_decade.png)
-This line chart highlights the growth in content production over time. From 1900 to 1980, the number of titles remained relatively modest. A sharp rise began in the 1990s, accelerating into the 2010s where production peaked at over **4 million titles**, fueled by the expansion of TV content and streaming platforms. The decline in the 2020s is likely due to **incomplete data** for the ongoing decade.
-
-&nbsp;
-### Average Runtime by Title Type
----
-![imdb analysis](plots/runtime_by_type.png)
-This chart presents the average runtime for each title type in the dataset. As expected, video games and feature films have the longest durations, while TV episodes, shorts, and TV shorts are significantly shorter in length.
-
-&nbsp;
-### Top-Rated Genres
----
-![imdb analysis](plots/top_genres_by_rating.png)
-This chart shows the typical duration across different title types. **Video games and movies** have the longest average runtimes, while **TV episodes, shorts,** and **TV shorts** are much shorter in comparison, reflecting their format and content scope.
-
-&nbsp;
-### Most Active Leading Actors and Actresses
----
-![imdb analysis](plots/top_active_actors.png)
-This chart showcases the top 20 most prolific leading actors and actresses in the IMDb dataset, ranked by the number of titles where they were credited as the primary performer in movies and TV movies. **Matsunosuke Onoe** leads the list with an impressive 525 appearances, followed by notable names like **Mohanlal**, **Brahmanandam**, and **Shin Seong-il**. The list spans a diverse group of international performers, highlighting the global scope of the film industry. These individuals have maintained prominent, front-facing roles across an extensive number of productions, reflecting both their popularity and the longevity of their acting careers.
-
-&nbsp;
-### Top 10 Highest-Rated Movies and Lead Actors
----
-![imdb analysis](plots/top_movie_actors.png)
-This scatter plot showcases the top 10 movies with the highest IMDb ratings (with at least 10,000 votes) and their corresponding lead actors or actresses. Each point represents a pairing of a movie and its main star, allowing us to associate top-rated content with standout performers. Notably, titles like **The Shawshank Redemption**, **The Godfather**, and **The Dark Knight** appear prominently, reflecting both critical acclaim and strong viewer endorsement.
-
-&nbsp;
-### Top Actors and Actresses in Drama Films
----
-![imdb analysis](plots/drama_actors.png)
-This bubble chart highlights the 10 most prolific actors and actresses in the Drama genre, based on the number of drama films they’ve appeared in (with at least 10,000 votes per title). **Robert De Niro** stands out as the clear leader, participating in 57 drama films, followed by **Shah Rukh Khan**, **Meryl Streep**, and **Anthony Hopkins**. The size and color intensity of each bubble correspond to the number of films, offering a visual snapshot of these performers' contributions to the genre.
-
-&nbsp;
-### Top 10 Most Active Directors
----
-![imdb analysis](plots/directors_films.png)
-This chart highlights the most prolific directors in the IMDb dataset, based on the number of titles they are credited for. **Johnny Manahan** leads the list with over 13,000 directed entries, followed closely by **Nivedita Basu** and **Saibal Banerjee**. The exceptionally high counts suggest that many of these directors have worked extensively on long-running television shows or serialized content, where each episode is counted individually.
-
-&nbsp;
-### Top 10 Highest-Rated Directors
----
-![imdb analysis](plots/top_rated_directors.png)
-This chart ranks directors with the highest average IMDb ratings, considering only those with at least 10 titles that received over 10,000 votes. **Tomohisa Taguchi**, **Barth Maunoury**, and **Shouta Goshozono** top the list with outstanding average ratings above 9.2. These results suggest that consistently high viewer ratings are often tied to creators with a strong portfolio of critically acclaimed work.
-
-&nbsp;
-### Average Rating: Famous vs Regular Directors
----
-![imdb analysis](plots/directors_vs_ratings.png)
-This chart compares the average IMDb ratings between two groups of directors:
-
-  - **Famous**: Directed 10+ titles with a total of over 100,000 votes.
-
-  - **Regular**: All other directors.
-
-Famous directors tend to have significantly higher average ratings (7.31) compared to regular ones (6.68). This suggests that experience and audience reach may correlate with better overall reception of their work.
-
-&nbsp;
-### Top 15 Genres by Count of Movies and TV Series
----
-![imdb analysis](plots/movies_vs_series_by_genres.png)
-This grouped bar chart shows the 15 most common genres across two content types: **movies** and **TV series**.
-
-  - **Drama** dominates both formats, accounting for over **21%** of movies and **22%** of all TV series.
-
-  - **Comedy** follows, representing **10%** of movies and a much larger **26%** of TV series, suggesting its strong association with serialized content.
-
-  - **Documentary** is the third most common, making up around **12%** of movies and **13%** of series.
-
-  - Genres like **Reality-TV** and **Talk-Show** appear almost exclusively in the TV series format, with **Reality-TV** alone making up more than **11%** of series.
-
-  - On the other hand, **Action**, **Romance**, and **Thriller** are significantly more common in movies.
-
-These proportions provide a clearer picture of how **genre preferences differ by format**, reflecting both storytelling suitability and audience expectations.
-
-&nbsp;
-### Top 10 Highest-Rated Movies
----
-![imdb analysis](plots/top_films.png)
-This horizontal bar chart highlights the highest-rated movies on IMDb with **at least 1 million user votes**, ensuring both **quality and popularity**.
-
-  - **The Shawshank Redemption (1994)** leads with a near-perfect rating of **9.3**, followed by **The Godfather (1972)** at **9.2**.
-
-  - The rest of the top 10 is filled with widely acclaimed classics like **The Dark Knight**, **Schindler’s List**, **Pulp Fiction**, and all three films from **The Lord of the Rings** trilogy.
-
-  - All movies on the list have IMDb ratings between **8.8** and **9.3**, showcasing a tight competition at the top.
-
-  - These titles span from **1972** to **2008**, reflecting long-standing appeal as well as modern acclaim.
-
-This chart emphasizes the consistency of quality storytelling and enduring fan appreciation across decades.
-
-&nbsp;
-### Correlation Between IMDb Rating and Number of Votes
----
-![imdb analysis](plots/correlation_ratings_votes.png)
-This scatter plot visualizes how **average IMDb rating** relates to the **number of votes** for titles with over **1 million votes**.
-
-  - Each point represents a movie, with the x-axis showing vote counts (log-scaled for clarity) and the y-axis showing the IMDb rating.
-
-  - A **positive correlation** is visible, confirmed by a linear trend line (r ≈ **0.63**), indicating that **more popular movies tend to have slightly higher ratings**.
-
-  - While the trend is upward, the spread suggests that high vote counts don’t guarantee high ratings — but many highly rated titles tend to gather large audiences over time.
-
-This analysis highlights how **audience size and engagement** often reflect or amplify a movie’s reputation, but it also reinforces that quality and popularity are not always equivalent.
-
-
-&nbsp;
-### Genre Rating Trends Over Time (Top 5 Genres)
----
-![imdb analysis](plots/genres_over_time.png)
-This line chart tracks the **average IMDb rating** of the **five most common genres** (Comedy, Documentary, Drama, Short, Talk-Show) across 20-year periods from 1900 to 2020.
-
-  - **All genres** show a general upward trend in ratings over time, particularly between **1940 and 2000**.
-
-  - **Documentary and Drama** have shown the most consistent growth, peaking above 7.2 on average in the 2000–2020 period.
-
-  - **Talk-Show** ratings are more volatile, with noticeable dips and rebounds.
-
-  - The steady rise of **Short films and Comedy** suggests growing appreciation and/or improved production quality in these formats.
-
-This historical view helps illustrate how **audience preferences and production quality** have evolved across genres over the last century.
