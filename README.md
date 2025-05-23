@@ -47,7 +47,9 @@ rovides information about individuals (e.g. actors, directors), including their 
     
  Contains directors and writers for each title, often stored as comma-separated IDs.
 
-🧹 **Data Preparation: Making the Data Clean and Analysis-Ready**
+
+
+ **Data Preparation: Making the Data Clean and Analysis-Ready**
 
 High-quality analysis starts with clean data. Before diving into the exploration, I completed the following data preparation steps (the full code and process details are available in [cleaning_scripts](./cleaning_scripts)):
 
@@ -69,31 +71,140 @@ High-quality analysis starts with clean data. Before diving into the exploration
   - **Libraries:** pandas, matplotlib, seaborn, numpy, scipy
 
 &nbsp; 
-## Key Insights from the Analysis
-  - **TV Episodes dominate** the IMDb dataset, far outnumbering other content types due to each episode being counted individually. Short films and full-length movies also represent a significant portion of the database.
+## 📈 Analysis & Insights: What Do the Numbers Say?
+Now that the data is prepared, let’s dive into it and uncover patterns that address our key research questions.
 
-  - **Content production has surged** over the past few decades. While earlier decades saw steady output, production dramatically increased starting in the 1990s and peaked in the 2010s—likely driven by the rise of television and streaming platforms.
+**1. General Overview of Success and Production Volume**
 
-  - **Runtimes vary significantly** by content type. Video games and feature films have the longest average runtimes, while TV episodes and shorts are considerably shorter, consistent with their formats.
+We begin with a broad look at the distribution of our key success metrics and the overall volume of content production.
 
-  - **Top genres like Drama, Comedy, and Documentary** dominate both film and TV, but some genres like Reality-TV and Talk-Show appear almost exclusively in series format, reflecting differences in storytelling and audience preferences.
+- **Content Production Dynamics:**
+    - **Insight:** The film industry has experienced exponential growth over the past few decades, especially since the 1990s. This surge is primarily driven by the massive volume of TV episodes, which now make up the overwhelming majority of entries in the IMDb database—far surpassing feature films and short films.
 
-  - **Genres with the highest ratings** (based on well-rated and widely voted content) include Biography, Animation, and Drama, which consistently receive strong viewer feedback.
+![imdb analysis](plots/titles_by_decade.png)
 
-  - **The most active actors and directors** have worked on hundreds (or even thousands) of titles, often in regional or serialized TV. For example, Matsunosuke Onoe and Johnny Manahan lead their respective categories by volume.
+- **Rating and Popularity Distribution:**
+    - **Insight:** Most films have an average rating between 6.5 and 7.5. Popularity (measured by vote count) is heavily skewed toward lower values, which is expected, as only a small number of films reach extremely high levels of audience engagement.
+    - **Visualization:**
+        - *(New chart)* Histogram of `averageRating`
+        - *(New chart)* Histogram of `numVotes` (possibly on a logarithmic scale for better readability)
 
-  - **Top-rated performers and directors** include well-established names with high consistency. Directors like Tomohisa Taguchi and actors in high-profile dramas stand out with excellent average ratings across multiple titles.
 
-  - **“Famous” directors** (with a high volume of popular work) tend to have better average ratings than “regular” ones, suggesting that reputation and reach may correlate with quality or perception.
+**2. Genres and Keywords: The Pulse of the Film Industry**
 
-  - **The most highly rated movies** with large vote counts include widely recognized titles like The Shawshank Redemption, The Godfather, and The Dark Knight, indicating enduring popularity and critical acclaim.
+Which themes and categories resonate most with audiences?
 
-  - **There’s a moderate positive correlation** between the number of votes and the average rating of a title. Highly rated titles tend to attract more viewers, or vice versa, but there’s still wide variance.
+- **Genre Popularity by Content Type:**
+    - **Insight:** Drama, Comedy, and Documentary remain the most common genres across both movies and TV series. However, Reality TV and Talk Shows are almost entirely exclusive to serial formats, while Action, Romance, and Thriller are significantly more frequent in feature films.
 
-  - **Average genre ratings have increased over time,** particularly for Documentary and Drama, showing a trend toward higher audience satisfaction in recent decades.
+![imdb analysis](plots/movies_vs_series_by_genres.png)
+  
+- **Top-Rated Genres:**
+    - **Insight:** Genres such as Biography, Animation, and Drama consistently receive high viewer ratings, possibly due to their ability to evoke deep emotions and deliver quality storytelling.
+  
+![imdb analysis](plots/top_genres_by_rating.png)
+
+- **Relationship Between Rating and Popularity:**
+    - **Insight:** There is a moderate positive correlation (r ≈ 0.63) between the number of votes and a film’s average rating. This suggests that more popular films tend to have slightly higher ratings. However, a high number of votes does not necessarily guarantee a high rating.
+
+![imdb analysis](plots/correlation_ratings_votes.png)
+
+**3. Film Industry Dynamics: Trends Over Time**
+
+How have ratings, popularity, and genre preferences evolved in cinema over the years?
+
+- **Genre Rating Trends by Decade:**
+    - **Insight:** All genres show a general upward trend in ratings over time, especially between 1940 and 2000. Documentaries and Dramas demonstrate the most stable growth.
+
+![imdb analysis](plots/genres_over_time.png)
+
+- **Evolution of Genre Popularity:**
+    - **Insight:** *(To be written: describe which genres have grown or declined in popularity)*
+    - **Visualization:**
+        - *(New chart)* `Stacked bar chart` (or `line plot`) of genre share by `Release_Year`. This will show how the distribution of genres changes over time.
+
+**4. Impact of Directors and Actors: Who Drives Success?**
+
+How significant is the role of key creators (directors, actors) in achieving high ratings and broad popularity?
+
+- **Influence of “Famous” Directors:**
+    - **Insight:** Directors with a large number of popular works tend to have significantly higher average ratings (7.31) compared to others (6.68). This suggests that experience and reputation are correlated with the overall perception of their films.
+      
+![imdb analysis](plots/directors_vs_ratings.png)
+
+- **Actors as Genre Icons:**
+    - **Insight:** Some actors become synonymous with certain genres and consistently appear in highly rated or popular projects within those genres. For example, Robert De Niro leads in the number of roles in drama films.
+      
+![imdb analysis](plots/drama_actors.png)
+
+- **Most Productive Creators:**
+    - **Insight:** *(Describe which actors/directors are the most productive, and how their productivity correlates with the average rating/popularity of their work.)*
+    - **Visualization:**
+        - *(New chart)* Bar plot of top actors by number of projects  
+          *(filter by a minimum number of votes to exclude films with only 1 rating).*
+        - *(New chart)* Bar plot of top directors by number of projects
+
+![imdb analysis](plots/directors_films.png)
+
+**5. Analysis of Film Duration Impact**
+
+How does a film's duration (`runtimeMinutes`) affect its average rating and number of votes?
+
+- **Insight:** *(Describe whether there is an optimal duration range in terms of average rating or vote count. For example, “Films with a medium runtime (90–120 minutes) tend to receive the highest average ratings...”)*
+
+- **Visualization:**
+    - *(New chart)* Scatter plot: `runtimeMinutes` vs `averageRating`
+    - *(New chart)* Scatter plot: `runtimeMinutes` vs `numVotes`
+    - *(Optional but recommended)* Bar plot: Average `averageRating` and `numVotes` by runtime categories (e.g., "up to 60 min", "60–90 min", "90–120 min", "120–150 min", "over 150 min"). This often provides more clarity than scatter plots.
 
 
 &nbsp; 
+
+## 💡 **Conclusions and Recommendations: What Did We Learn?**
+
+This analysis uncovered several key factors influencing audience recognition of films and allowed us to formulate practical recommendations based on them.
+
+**Key Insights:**
+
+- **Production Volume:** The film and TV industry is experiencing unprecedented growth, especially driven by TV episodes, highlighting the need for new strategies to capture audience attention.
+
+- **Genre Preferences:** Drama, Comedy, and Documentary remain universally popular, while Biography and Animation genres consistently receive high ratings.
+
+- **Impact of Creators:** Involving experienced and well-known directors and actors statistically correlates with higher ratings and broader popularity, confirming their role as "quality guarantors."
+
+- **Correlation Between Quality and Popularity:** High ratings often lead to widespread popularity—but not always the other way around—emphasizing the importance of focused, high-quality content creation.
+
+### 🎯 Recommendations
+
+#### For Production Companies:
+
+- **Strategic Genre Planning:** Consider not only overall popularity but also the high-rating potential of certain genres (e.g., Biography, Animation) to maximize audience satisfaction.
+
+- **Attracting "Stars":** Invest in collaboration with directors and actors who have a proven track record of high ratings and audience engagement.
+
+- **Duration Optimization:** Analyze the optimal runtime of films for your target audience in order to maximize viewer recognition and satisfaction.
+
+#### For Streaming Platforms:
+
+- **Content Curation:** Use data on successful genres, trends, and creator involvement to shape curated collections and personalized recommendations.
+
+- **Acquisition/Production Strategy:** Focus on acquiring or producing content aligned with identified growth trends and the characteristics of highly rated films.
+
+
+### 🔮 Conclusion and Next Steps
+
+This analysis provides insight into the multifaceted factors that influence audience recognition of films. The film industry is constantly evolving, and continuous data analysis is key to understanding its dynamics and shifting audience preferences.
+
+#### Areas for Future Improvement:
+
+- **Deeper Role Analysis:** Expand the study to include the influence of screenwriters, producers, and other key roles using the `title.principals` table.
+
+- **Creative Collaboration Analysis:** Explore which combinations of directors and actors consistently lead to successful films.
+
+- **External Data Integration:** Incorporate external data sources such as awards (e.g., Oscars, Golden Globes) to compare critical acclaim with audience recognition.
+
+- **ML Applications:** Develop machine learning models to predict the potential rating or popularity of a new film based on its characteristics.
+
 ## Insights Deep-Dive
 
 ### Title Type Distribution
