@@ -1,26 +1,26 @@
-# IMDb Data Analysis
+# Success Factors of Movies on IMDb
+![imdb analysis](plots/IMDB.svg)
 &nbsp; 
-## Project Overview 
+## 🚀 Introduction: What Makes a Film Popular?
+In the world of cinema, where hundreds of new films are released every day, understanding what truly captures the audience’s attention is a challenging yet fascinating task. In this personal project, I explore publicly available IMDb datasets to uncover the key factors that influence viewer recognition and film popularity. My goal is to understand how genres, runtime, and—most importantly—the involvement of specific directors and actors shape how audiences perceive a film. I also look at how these preferences have evolved over time.
 
-This project explores trends in the IMDb dataset to better understand what types of content are produced, how audiences rate them, and who the most active or successful contributors are. 
-I focus on visualizing key metrics like genre popularity, production volume over time, average ratings, and contributor performance in a clear and approachable way.
+This project does not aim to predict box office revenue or commercial success, as it relies solely on publicly accessible IMDb data that does not include financial information. Instead, the focus is on analyzing critical and audience reception—average ratings and vote counts—and on examining the impact of the people behind and in front of the camera.
 
 &nbsp; 
-## Key Objectives
-The goal of this project is to extract meaningful insights from the IMDb dataset by answering several key questions:
+## ❓ Key Research Questions
+In this project, I aim to answer the following questions using IMDb data:
 
-  - What types of content (e.g. movies, series, episodes) are most common?
+- What defines a “successful” film in terms of audience ratings and overall popularity?
 
-  - How has production volume changed over time?
+- How are genres and keywords related to a film’s ratings and popularity?
 
-  - Which genres are the most popular and which receive the highest ratings?
+- How have ratings, popularity, and genre preferences in the film industry evolved over time?
 
-  - What is the typical runtime for different types of content?
+- Which directors and actors (based on their specific roles) are consistently associated with highly rated and popular films?
 
-  - Who are the most active and highest-rated actors and directors?
+- How does a film’s runtime affect its average rating and number of votes?
 
-  - Is there a connection between how popular a title is (number of votes) and how well it's rated?
-    
+
 &nbsp;
  ## Data Sources
 The analysis is based on IMDb data files manually downloaded from the official [IMDb datasets](https://datasets.imdbws.com/) page and then uploaded to Google BigQuery for querying. 
@@ -46,6 +46,19 @@ rovides information about individuals (e.g. actors, directors), including their 
   - **IMDb_dataset.title_crew → title.crew.tsv**
     
  Contains directors and writers for each title, often stored as comma-separated IDs.
+
+🧹 Data Preparation: Making the Data Clean and Analysis-Ready
+
+High-quality analysis starts with clean data. Before diving into the exploration, I completed the following data preparation steps (the full code and process details are available in [cleaning_scripts](./cleaning_scripts)):
+
+- Data merging: The original TSV files were converted to CSV and merged using the common movie identifier (tconst) to form a unified dataset for analysis (specifically, title_ratings and title_basics tables).
+
+- Handling missing values: Missing data in key columns (averageRating, numVotes, genres, runtimeMinutes, startYear) was addressed—primarily by removing incomplete rows or imputing values logically—to ensure accurate calculations.
+
+- Data type conversion: Columns such as startYear, runtimeMinutes, averageRating, and numVotes were cast to appropriate numeric formats.
+
+- Parsing categorical data: Genre values, as well as director and actor identifiers (stored as comma-separated strings), were parsed—often within SQL queries—for entity-level analysis.
+
 
  &nbsp; 
 ## Tools & Technologies
