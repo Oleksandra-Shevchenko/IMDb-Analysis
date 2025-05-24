@@ -1,27 +1,28 @@
 # Success Factors of Movies on IMDb
 ![imdb analysis](plots/IMDB.svg)
 &nbsp; 
-## 🚀 Introduction: What Makes a Film Popular?
-In the world of cinema, where hundreds of new films are released every day, understanding what truly captures the audience’s attention is a challenging yet fascinating task. In this **personal project**, I explore publicly available IMDb datasets to uncover the **key factors that influence viewer recognition and film popularity**. My goal is to understand how genres, runtime, and—most importantly—the involvement of specific directors and actors shape how audiences perceive a film. I also look at how these preferences have evolved over time.
+## 🚀 Introduction: Unveiling the Drivers of Film Popularity on IMDb
 
-This project does not aim to predict box office revenue or commercial success, as it relies solely on publicly accessible IMDb data that does not include financial information. Instead, the focus is on **analyzing critical and audience reception** —average ratings and vote counts—and on examining **the impact of the people behind and in front of the camera**.
+In the dynamic world of cinema, where content creation is booming, understanding what truly captivates audiences is paramount for industry players. This **personal project** delves into publicly available IMDb datasets to uncover the **key factors that influence viewer recognition and film popularity**. My goal is to understand how elements like genres, runtime, and—critically—the contributions of specific directors and actors shape how audiences perceive a film, and how these preferences have evolved over time.
 
+While this project does not aim to predict box office revenue or commercial success (as it relies solely on publicly accessible IMDb data without financial information), its focus is on **analyzing critical and audience reception** – specifically, average ratings and vote counts. This analysis provides valuable insights into content strategy, talent acquisition, and audience engagement, crucial for **production companies, streaming platforms, and talent agencies** striving to connect with viewers. I undertook this project to **deepen my skills in large-scale data querying with SQL (Google BigQuery), data manipulation with Python/Pandas, and effective data visualization**, demonstrating how analytical insights can inform strategic decisions in the entertainment industry.
 &nbsp; 
+
 ## ❓ Key Research Questions
-In this project, I aim to answer the following questions using IMDb data:
 
-- **What defines a “successful” film in terms of audience ratings and overall popularity?**
+In this project, I aim to answer the following questions using IMDb data, defining **"success" by a film's average rating and total vote count on IMDb**:
 
-- **How are genres and keywords related to a film’s ratings and popularity?**
-
-- **How have ratings, popularity, and genre preferences in the film industry evolved over time?**
-
-- **Which directors and actors (based on their specific roles) are consistently associated with highly rated and popular films?**
-
-- **How does a film’s runtime affect its average rating and number of votes?**
-
-
+* **What defines a “successful” film in terms of audience ratings and overall popularity on IMDb?** (This question serves as a foundation for understanding our key metrics.)
+  
+* **How are genres and keywords related to a film’s ratings and popularity?**
+  
+* **How have ratings, popularity, and genre preferences in the film industry evolved over time?**
+  
+* **Which directors and actors (based on their specific roles) are consistently associated with highly rated and popular films?**
+  
+* **How does a film’s runtime affect its average rating and number of votes?**
 &nbsp;
+
  ## Data Sources
 The analysis is based on IMDb data files manually downloaded from the official [IMDb datasets](https://datasets.imdbws.com/) page and then uploaded to Google BigQuery for querying. 
 The following tables were created from the corresponding TSV files:
@@ -93,7 +94,7 @@ When it comes to popularity, most films receive a **relatively low number of vot
 ![imdb analysis](plots/num_votes_log_bins.png)
 
 
-**2. Genres and Keywords: The Pulse of the Film Industry**
+**2. How are genres related to a film’s ratings and popularity?**
 
 Which themes and categories resonate most with audiences?
 
