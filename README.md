@@ -149,8 +149,9 @@ How significant is the role of key creators (directors, actors) in achieving hig
 ![imdb analysis](plots/drama_actors.png)
 
 - **Most Productive Creators:**
-- 
-  - **Insight:** The analysis shows that the most prolific directors, such as **Johnny Manahan** (over 13,000 films) and **Nivedita Basu** (over 11,000 films), as well as actors like **Matsunosuke Onoe** (525 appearances), often work in high-volume content formats such as TV series, where each episode is counted as a separate film. This highlights their significant role in continuous content production, but does not always directly correlate with their average ratings, as their extensive filmographies may include both highly rated and less prominent works.
+
+
+  - **Insight:** The analysis shows that the most prolific directors, such as **Johnny Manahan** (over 13,000 films) and **Nivedita Basu** (over 11,000 films), as well as actors like **Mohanlal** (280+ appearances), often work in high-volume content formats such as TV series, where each episode is counted as a separate film. This highlights their significant role in continuous content production, but does not always directly correlate with their average ratings, as their extensive filmographies may include both highly rated and less prominent works.
 
 ![imdb analysis](plots/directors_films.png)
 ![imdb analysis](plots/top_active_actors.png)
@@ -214,16 +215,11 @@ This analysis uncovered several key factors influencing audience recognition of 
 - **Acquisition/Production Strategy:** Focus on acquiring or producing content aligned with identified growth trends and the characteristics of highly rated films.
 
 
-### 🔮 Conclusion and Next Steps
+### **🚀 Future Steps and Potential Enhancements**
+This analysis provides a solid foundation for understanding the factors influencing film success. Future enhancements could include:
 
-This analysis provides insight into the multifaceted factors that influence audience recognition of films. The film industry is constantly evolving, and continuous data analysis is key to understanding its dynamics and shifting audience preferences.
-
-#### Areas for Future Improvement:
-
-- **Deeper Role Analysis:** Expand the study to include the influence of screenwriters, producers, and other key roles using the `title.principals` table.
-
-- **Creative Collaboration Analysis:** Explore which combinations of directors and actors consistently lead to successful films.
-
-- **External Data Integration:** Incorporate external data sources such as awards (e.g., Oscars, Golden Globes) to compare critical acclaim with audience recognition.
-
-- **ML Applications:** Develop machine learning models to predict the potential rating or popularity of a new film based on its characteristics.
+* **Deepening the Impact of Directors and Actors:** Incorporate more sophisticated **network analysis** to understand collaboration patterns and their impact on film success. This could involve analyzing clusters of successful collaborators.
+  
+* **Expanding Data Sources for a Holistic View:** Integrate additional data sources such as **box office performance, marketing spend, and critical reviews from other platforms** (e.g., Rotten Tomatoes, Metacritic) to develop a more comprehensive definition of "success" beyond IMDb ratings and votes. This would allow for financial success analysis.
+  
+* **Developing Predictive Machine Learning Models:** Build **predictive models** to assess the potential rating or popularity of a new film based on its characteristics (genre, runtime, key cast/crew, etc.). This could involve exploring **regression models (e.g., Linear Regression, Random Forest Regressor)** for rating prediction and **classification models (e.g., Logistic Regression, Support Vector Machines)** for popularity categories (e.g., "high vote count" vs. "low vote count").
